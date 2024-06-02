@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "46E2B2B7-D481-4179-A2E0-8941CC6072EE",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "0011011"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:",
+      "identifier" : "b2d",
+      "name" : "b2d"
+    }
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

@@ -8,14 +8,12 @@ import ArgumentParser
 import Foundation
 
 struct Encode: ParsableCommand{
-    @Flag(name: .shortAndLong, help: "Marks the input should be encoded") var encode: Bool = false
     @OptionGroup var options: Options
     
     mutating func run() throws {
         
         let data = Data(options.arg.utf8)
-        print(data.base64EncodedString(options: .endLineWithCarriageReturn))
-    
+        print(data.base64EncodedString(options: .lineLength76Characters))
     }
 }
 

@@ -16,5 +16,5 @@ struct B2D: ParsableCommand{
 
 struct Options: ParsableArguments{
     @Argument(help: "Value you wish to convert") var arg: String
-    @Option(name: .shortAndLong, help: "set the number system base") var base: Int = 2
+    //@Option(name: .shortAndLong, help: "set the number system base") var base: Int = 2
 }
