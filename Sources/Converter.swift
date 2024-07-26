@@ -15,6 +15,7 @@ struct Converter: ParsableCommand{
     @Flag(name:.shortAndLong, help: "Marks the input as an IP address or Subnet mask") var address: Bool = false
     @Flag(name: .shortAndLong, help: "Marks the input as base 64 string") var base64: Bool = false
     @Flag(name: .shortAndLong, help: "Marks the input as a base 10 number") var dec: Bool = false
+    @Flag(name: .shortAndLong, help: "Marks the input as octal") var octal: Bool = false
     @Option(name: .shortAndLong, help: "Set the separator for the IP or Subnet octets: ") var separator: String = "."
     
     mutating func run() throws{
