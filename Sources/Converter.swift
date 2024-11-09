@@ -16,17 +16,21 @@ struct Converter: ParsableCommand{
     @Flag(name: .shortAndLong, help: "Marks the input as base 64 string") var base64: Bool = false
     @Flag(name: .shortAndLong, help: "Marks the input as a base 10 number") var dec: Bool = false
     @Flag(name: .shortAndLong, help: "Marks the input as octal") var octal: Bool = false
-    @Option(name: .shortAndLong, help: "Set the separator for the IP or Subnet octets: ") var separator: String = "."
+    
     
     mutating func run() throws{
         let invalidNumbers = [2,3,4,5,6,7,8,9]
+		let acceptedNumberBases: [Int] = [2,8,10,16,64]
+		guard acceptedNumberBases.contains(options.numberBase) else{
+			throw CleanExit.message("Invalid number base: \(options.numberBase) number base must be one of: \(acceptedNumberBases)")
+		}
         if base64 || options.numberBase == 64{
             base64Convert(options.arg)
             return
         }
 
 		if dec || options.numberBase == 10 || address && dec{
-            let octets = options.arg.components(separatedBy: separator)
+			let octets = options.arg.components(separatedBy: options.separator)
             var binString: String = ""
             for b in octets{
                     let byte = decToBinary(b)
@@ -37,7 +41,7 @@ struct Converter: ParsableCommand{
             return
         }
         if address{
-            let octets = options.arg.components(separatedBy: separator)
+			let octets = options.arg.components(separatedBy: options.separator)
             var decString: String = ""
             for b in octets{
                 do{

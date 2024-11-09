@@ -16,5 +16,6 @@ struct B2D: ParsableCommand{
 
 struct Options: ParsableArguments{
     @Argument(help: "Value you wish to convert") var arg: String
-    @Option(name: .shortAndLong, help: "set the number system base") var numberBase: Int = 2
+    @Option(name: .shortAndLong, help: "Set the number system base. The default is 2 (binary). Other options are 8 (octal), 10 (decimal), and 16 (hexadecimal).") var numberBase: Int = 2
+	@Option(name: .shortAndLong, help: "Set the separator for the IP or Subnet octets: ") var separator: String = "."
 }
