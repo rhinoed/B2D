@@ -20,12 +20,12 @@ struct Converter: ParsableCommand{
     
     mutating func run() throws{
         let invalidNumbers = [2,3,4,5,6,7,8,9]
-        if base64{
+        if base64 || options.numberBase == 64{
             base64Convert(options.arg)
             return
         }
 
-        if dec || address && dec{
+		if dec || options.numberBase == 10 || address && dec{
             let octets = options.arg.components(separatedBy: separator)
             var binString: String = ""
             for b in octets{
@@ -45,15 +45,12 @@ struct Converter: ParsableCommand{
                     decString.append("\(String(byte)).")
                 }catch{
                     print("\(error.localizedDescription)\n\(error)")
-                    
-                    
                 }
-                
             }
             let _ = decString.popLast()
             print(decString)
             
-        }else{
+		}else if options.numberBase == 2{
             
             let sigBit = options.arg.count - 1
             guard sigBit <= 63 else{
