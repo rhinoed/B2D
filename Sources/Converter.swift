@@ -28,12 +28,25 @@ struct Converter: ParsableCommand{
             base64Convert(options.arg)
             return
         }
+		
+		switch true {
+			case options.numberBase == 2:
+				print(try binaryToDec(options.arg,options.arg.count,invalidNumbers))
+			case options.numberBase == 8 || octal:
+				print("")
+			case options.numberBase == 16:
+				print("")
+		case options.numberBase == 64 || base64:
+				print("")
+			default :
+				print("")
+		}
 
 		if dec || options.numberBase == 10 || address && dec{
 			let octets = options.arg.components(separatedBy: options.separator)
             var binString: String = ""
             for b in octets{
-                    let byte = decToBinary(b)
+                    let byte = try decToBinary(b)
                     binString.append("\(String(byte)).")
             }
             let _ = binString.popLast()
@@ -69,7 +82,7 @@ struct Converter: ParsableCommand{
     }
 }
 extension Converter{
-    fileprivate func binaryToDec(_ digits: String, _ sigBit: Int, _ invalidNumbers: [Int]) throws -> Int {
+    private func binaryToDec(_ digits: String, _ sigBit: Int, _ invalidNumbers: [Int]) throws -> Int {
         var place = 1 << (digits.count - 1)
         var output = 0
         for i in digits{
@@ -85,25 +98,42 @@ extension Converter{
         }
         return output
     }
-    fileprivate func base64Convert (_ base64: String){
+    private func base64Convert (_ base64: String){
         if let data = Data(base64Encoded: base64,options: .ignoreUnknownCharacters){
             
             print(String(data: data, encoding: .utf8) ?? "fail")
         }
     }
     
-    fileprivate func checkInput(_ input: String) throws -> String{
+    private func checkInput(_ input: String) throws -> String{
         return "placeholder"
     }
-    fileprivate func decToBinary(_ input: String)-> String{
-        if let input = Int(input){
-           return String(input,radix: 2)
-        }
-        return ""
+    private func decToBinary(_ input: String) throws->String{
+		guard let i = Int(input) else{
+			throw ConversionError.invalidInput(description: "The argument included a non decimal number")
+		}
+		return String(i,radix: 2)
+        
     }
+	
+	private func isValidBinaryString( _ input: String) throws -> Bool{
+		let validBinaryNumbers = ["0","1"]
+		guard validBinaryNumbers.contains(input) else{
+			throw ConversionError.invalidInput(description: "The argument included a non binary number")
+		}
+		return true
+	}
 }
 
 enum ConversionError: LocalizedError{
     case invalidInput(description: String)
     case outOfBounds(description: String)
+    var errorDescription: String?{
+        switch self{
+        case .invalidInput(let description):
+            return description
+        case .outOfBounds(let description):
+            return description
+        }
+    }
 }
