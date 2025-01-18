@@ -7,8 +7,11 @@
 #plugins:
 #   - jekyll-remote-theme
 
-title: B2D
-description: Repo for B2D a simple binary to decimal coverter.
+title: [B2D]
+description: [Repo for B2D a simple binary to decimal coverter.]
+show_downloads: [true]
+markdown: [kramdown]
+
 theme: minima
 plugins:
   - jekyll-feed
