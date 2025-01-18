@@ -1,8 +1,14 @@
-title: [B2D]
-description: [A simple binary to decimal converter]
-show_downloads: [true]
+#title: [B2D]
+#description: [A simple binary to decimal converter]
+#show_downloads: [true]
 
 # theme
-remote_theme: pages-themes/cayman@v0.2.0
+#remote_theme: pages-themes/cayman@v0.2.0
+#plugins:
+#   - jekyll-remote-theme
+
+title: B2D
+description: Repo for B2D a simple binary to decimal coverter.
+theme: minima
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
