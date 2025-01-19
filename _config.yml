@@ -13,6 +13,7 @@ show_downloads: [true]
 markdown: [kramdown]
 
 theme: minima
-skin: dark
+minima:
+  skin: dark
 plugins:
   - jekyll-feed
